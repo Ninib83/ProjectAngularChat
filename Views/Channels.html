@@ -1,0 +1,43 @@
+﻿<div class="col-md-12 text-center">
+    <h1 ng-bind="title"></h1>
+    <h6>Welcome to the world of channels</h6>
+    <br>
+</div>
+<!--Ett input formulär där man kan filtrera kanaler kopplad med ng-repeat-->
+<div class="container">
+    <div class="form-group">
+        <input type="text"
+               class="form-control"
+               placeholder="Search for a channel..."
+               ng-model="name" /> <!--kopplad med ng-repeat-->
+    </div>
+</div>
+
+    <div class="col-sm-6 col-md-3 text-center" ng-repeat="channel in data.channels | filter: {name:name} | censor track by $index">
+        <div class="thumbnail">
+            <div class="caption">
+                <h3 ng-bind="channel.name"></h3>
+                <p>
+                  <!--kanppen för kanalen som oxå tar med sig kanalens id-->
+                    <button type="button"
+                            class="btn btn-default"
+                            ng-click="go('/channel/' + channel.id)">
+                        Enter Channel
+                    </button>
+
+                    <!--knappen för premuninera-->
+                    <button type="button"
+                            class="btn btn-info"
+                            ng-click="subscribe(channel.id)"
+                            ng-show="data.subscribedChannels.indexOf(channel.id) == -1">
+                        <span class="glyphicon glyphicon-eye-open"></span> Subscribe
+                    </button>
+                    <!--När knappen för premuninera är klickad så visar den en ny knapp som beskriver att det gått igenom-->
+                    <span ng-show="data.subscribedChannels.indexOf(channel.id) != -1">
+                        <span class="glyphicon glyphicon-ok"></span> Subscribed
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+

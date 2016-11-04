@@ -1,0 +1,106 @@
+﻿<div class="col-md-12 text-center">
+    <h1 ng-bind="data.channel.name"></h1>
+    <h6>Welcome to my chat</h6>
+    <br>
+</div>
+    <div  class="sm-wrapper col-md-7" scroll-button="data.channel.messages" >
+        <fieldset>
+            <legend>Chat Window</legend>
+            <div class="panel-body " >
+                <ul class="media-list">
+                    <li class="media ">
+                        <div class="media-body col-md-12" ng-repeat="message in data.channel.messages |censor track by $index">
+                            <a href="#" class="pull-left">
+                                <img src="../IMG/profil_blank_g.jpg" height="85" width="80" style="border-radius: 40px;" />
+                            </a>
+                            <p class="p_message" ng-bind="message.body"></p>
+                            <hr>
+                            <span class="text-muted">
+                                <small class="text-muted">
+                                    Last message by:
+                                    <i ng-bind="message.author"></i>
+                                    , Date:
+                                    <i ng-bind="message.timeSent | date: 'yyyy-MM-dd hh:mm'"></i>
+                                </small>
+                            </span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </fieldset>
+    </div>
+
+<div class="col-md-5 channel-list">
+    <fieldset>
+        <legend>Channels</legend>
+        <table class="table">
+            <tr>
+                <th ng-click="orderByMe('Name')">Name</th>
+                <th ng-click="orderByMe('Enter')">Enter</th>
+                <th ng-click="orderByMe('Subscribe')">Subscribe</th>
+            </tr>
+
+
+            <tr ng-repeat="channel in data.channels | orderBy:title | censor">
+                <td class="col-md-1"><h4 ng-bind="channel.name"></h4></td>
+                <td class="col-md-1">
+                    <!--kanppen för kanalen som oxå tar med sig kanalens id-->
+                    <button type="button"
+                            class="btn btn-default"
+                            ng-click="go('/channel/' + channel.id)">
+                        Enter Channel
+                    </button>
+                </td>
+                <td class="col-md-1">
+                    <button type="button"
+                            class="btn btn-info"
+                            ng-click="subscribe(channel.id)"
+                            ng-show="data.subscribedChannels.indexOf(channel.id) == -1">
+                        <span class="glyphicon glyphicon-eye-open"></span> Subscribe
+                    </button>
+
+                    <span ng-show="data.subscribedChannels.indexOf(channel.id) != -1">
+                        <span class="glyphicon glyphicon-ok"></span> Subscribed
+                    </span>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+</div>
+<div class="col-md-5">
+    <fieldset>
+        <legend></legend>
+
+        <div class="col-md-12 ">
+
+            <form ng-submit="addMessage()">
+                <div class="form-group">
+                    <validated-input type="text"
+                                     id="newMessageAuthor"
+                                     model="newMessage.author"
+                                     isValid="newMessgeIsValid"></validated-input>
+                </div>
+
+                <div class="form-group">
+                    <validated-input type="text"
+                                     id="newMessageBody"
+                                     model="newMessage.body"
+                                     rows="3"
+                                     isValid="newMessgeIsValid"></validated-input>
+                </div>
+
+                <button type="submit"
+                        class="btn btn-success "
+                        title="newMessage">
+                    Send
+                </button>
+
+                <button type="button"
+                        class="btn btn-default"
+                        ng-click="go('/Channels/')">
+                    Back to Channels
+                </button>
+            </form>
+        </div>
+    </fieldset>
+</div>

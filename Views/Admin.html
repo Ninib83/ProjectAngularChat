@@ -1,0 +1,85 @@
+﻿<div class="col-md-12 text-center">
+    <h1 ng-bind="title"></h1>
+    <h6>Welcome to admin</h6>
+    <br>
+</div>
+
+<div class="col-md-12">
+    <hr />
+    <button type="button"
+            class="btn btn-success"
+            data-toggle="modal"
+            data-target="#newChannelModal">
+        <span class="glyphicon glyphicon-plus"></span>
+        Add Channel
+    </button>
+    <hr />
+</div>
+
+
+<div class="col-md-6 text-center">
+    <fieldset>
+        <legend>Channels</legend>
+    <table class="table">
+        <tr>
+            <th ng-click="orderByMe('title')">Title</th>
+            <th ng-click="orderByMe('Delete')">Delete</th>
+            <th ng-click="orderByMe('Subscribe')">Subscribe</th>
+        </tr>
+
+
+        <tr ng-repeat="channel in data.channels | orderBy:title | censor">
+            <td class="col-md-1" ><h4 ng-bind="channel.name"></h4></td>
+            <td class="col-md-1">
+                <button type="button"
+                        class="btn btn-danger"
+                        ng-click="deleteChannel(channel)">
+                    <span class="glyphicon glyphicon-remove"></span> Delete
+                </button>
+            </td>
+            <td class="col-md-1">
+                <button type="button"
+                        class="btn btn-info"
+                        ng-click="subscribe(channel.id)"
+                        ng-show="data.subscribedChannels.indexOf(channel.id) == -1">
+                    <span class="glyphicon glyphicon-eye-open"></span> Subscribe
+                </button>
+
+                <span ng-show="data.subscribedChannels.indexOf(channel.id) != -1">
+                    <span class="glyphicon glyphicon-ok"></span> Subscribed
+                </span>
+            </td>
+        </tr>
+    </table>
+    </fieldset>
+</div>
+
+<div class="col-md-6 text-center">
+    <fieldset>
+        <legend>Favoriter</legend>
+
+        <draggable id="note.id"
+                   name="note.name"
+                   ng-repeat="note in data.notes track by $index">
+        </draggable>
+
+        <div class="col-md-12" ng-repeat="channel in data.channels | filter: {subscribed: true} |censor track by $index">
+            <div>
+                <h3 ng-bind="channel.name"></h3>
+            </div>
+
+            <button type="button"
+                    class="btn btn-default"
+                    ng-click="go('/Channel/' + channel.id)">
+                Enter Channel
+            </button>
+
+            <button type="button"
+                    class="btn btn-danger"
+                    ng-click="unsubscribe(channel.id)">
+                <span class="glyphicon glyphicon-eye-close"></span> Unsubscribe
+            </button>
+        </div>
+    </fieldset>
+</div>
+<div ng-include="'Views/Partials/NewChannelModal.html'"></div>

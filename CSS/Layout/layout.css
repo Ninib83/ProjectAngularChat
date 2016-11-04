@@ -2,3 +2,43 @@
     padding: 0;
     margin: 0;
 }
+.sm-wrapper {
+    height: 450px;
+    overflow-y: auto;
+    max-height:450px;
+    margin-bottom:20px;
+
+}
+
+.channel-list{
+    height: auto;
+    overflow-y: auto;
+    max-height:250px;
+    margin-bottom:20px;
+}
+.panel-body{
+    background-color:white;
+}
+.media-body{
+    border: 2px solid orangered;
+    margin-bottom:20px;
+    padding: 10px;
+    background-color:aliceblue;
+    border-radius: 22px;
+    width:600px;
+    margin-left:20px;
+    height:auto;
+}
+.p_message{
+    margin-top: 20px;
+    word-wrap: break-word;
+}
+.thumbnail{
+    border: 2px solid orangered;
+}
+.pull-left{
+    margin-right: 50px;
+    margin-top: 10px;
+    margin-left: 15px;
+}
+
