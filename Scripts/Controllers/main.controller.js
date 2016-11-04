@@ -8,6 +8,8 @@ angular.module("mainModule")
         "serverApi",
         function ($scope, $location, $route, serverApi) {
             $scope.$route = $route;
+
+            //Scope för Validering
             $scope.formInputs = [{
                 type: "text",
                 id: "name",
@@ -20,27 +22,23 @@ angular.module("mainModule")
                 alert("TODO: Submit form properly");
             };
 
+            //Scope för Data
             $scope.data = {
                 messages: [],
                 channel: {},
                 channels: [],
                 subscribedChannels: [],
                 feed: [],
-                notes: [
-                    {
-                        id: 1,
-                        name: "Title 1"
-                    }
-                ],
+                //notes: [
+                //    {
+                //        id: 1,
+                //        name: "Title 1"
+                //    }
+                //],
 
 
             };
-
-
-
-
-
-           
+        
 
             // Loppar igenom alla subscriptions i en array och anger olika världen
             $scope.getFeed = function () {

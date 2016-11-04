@@ -5,6 +5,7 @@
             return function (input) {
                 var output = input;
 
+                //Svart Lista (Ord som ska censureras).
                 var blacklist = [
                     "Idiot",
                     "Fan",
@@ -13,6 +14,7 @@
 
                 ];
 
+                // Här kollar den igenom så att ordet matchar och sedan ersätter ordet med censur symbolerna.
                 angular.forEach(output, function (word) {
                     angular.forEach(blacklist, function (blacklistedWord) {
                         for (var key in word)
